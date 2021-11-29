@@ -1,4 +1,4 @@
-const peopleListUrl = '../data.json';
+const contactsListUrl = '../data.json';
 
 export default async () => {
   const res = await fetch(peopleListUrl);
