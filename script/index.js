@@ -4,8 +4,8 @@ import renderContactsList from './renderContactsList.js';
 (async () => {
   try {
     const peopleList = await getContactsList();
-    const root = document.getElementById('container');
-    renderContactsList(root, peopleList);
+    const container = document.getElementById('container');
+    renderContactsList(container, peopleList);
   } catch {
     console.log('Failed to load people list');
   }
