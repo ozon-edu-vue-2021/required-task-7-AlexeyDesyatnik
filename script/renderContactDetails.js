@@ -1,3 +1,5 @@
+import renderContactsList from "./renderContactsList.js";
+
 /* TEMPLATE:
 <div class="details-view">
       <div class="back"></div>
@@ -24,7 +26,13 @@ const templateContactDetails = document.getElementById('tmpl-contact-details');
 export default (contact, state) => {
   const { container, contacts } = state;
   const details = templateContactDetails.content.cloneNode(true);
+  const back = details.querySelector('.back');
+  back.addEventListener('click', () => {
+    container.classList.remove('details');
+    renderContactsList(state);
+  });
   container.innerHTML = '';
   container.appendChild(details);
+  container.classList.add('details');
   console.log(contact);
 };
