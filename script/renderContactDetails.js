@@ -26,11 +26,16 @@ const templateContactDetails = document.getElementById('tmpl-contact-details');
 export default (contact, state) => {
   const { container, contacts } = state;
   const details = templateContactDetails.content.cloneNode(true);
+
   const back = details.querySelector('.back');
   back.addEventListener('click', () => {
     container.classList.remove('details');
     renderContactsList(state);
   });
+
+  const name = details.querySelector('.contact-name');
+  name.innerHTML = contact.name;
+
   container.innerHTML = '';
   container.appendChild(details);
   container.classList.add('details');
