@@ -1,21 +1,25 @@
-/* People list rendering */
-const templateContactsList = document.getElementById('tmpl-contacts-list');
-const templateContact = document.getElementById('tmpl-contact')
+import renderContactDetails from "./renderContactDetails.js";
 
-const renderContact = (contact) => {
-  const contactElement = templateContact.content.cloneNode(true);
-  contactElement.id = contact.id;
-  const nameElement = contactElement.querySelector('li strong');
+const templateContactsList = document.getElementById('tmpl-contacts-list');
+const templateContact = document.getElementById('tmpl-contacts-list-item')
+
+const renderContact = (contact, state) => {
+  const contactNode = templateContact.content.cloneNode(true);
+  const li = contactNode.querySelector('li');
+  li.id = contact.id;
+  li.addEventListener('click', () => renderContactDetails(contact, state));
+  const nameElement = contactNode.querySelector('li strong');
   nameElement.innerText = contact.name;
-  return contactElement;
+  return contactNode;
 };
 
-export default (container, peopleList) => {
+export default (state) => {
+  const { container, contacts } = state;
   const contactsList = templateContactsList.content.cloneNode(true);
   const ul = contactsList.querySelector('.contacts-list');
-  peopleList.forEach(contact => {
-    const contactElement = renderContact(contact);
-    ul.appendChild(contactElement);
+  contacts.forEach(contact => {
+    const contactNode = renderContact(contact, state);
+    ul.appendChild(contactNode);
   });
   container.innerHTML = '';
   container.appendChild(contactsList);

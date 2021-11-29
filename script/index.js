@@ -1,13 +1,13 @@
-import getContactsList from './getContactsList.js';
+import getContacts from './getContacts.js';
 import renderContactsList from './renderContactsList.js';
 
 
 /*
 Programmaticaly add transform styles for list items
 */
-const addContactsListStyles = (contactList) => {
+const addContactsListStyles = (contacts) => {
   let style = '';
-  for (let i = 11; i <= contactList.length; i++ ) {
+  for (let i = 11; i <= contacts.length; i++ ) {
     const offset = (i - 1) * 70;
     style += `
 #container .list-view ul li:nth-child(${i}) {
@@ -22,10 +22,11 @@ const addContactsListStyles = (contactList) => {
 
 (async () => {
   try {
-    const contactsList = await getContactsList();
-    addContactsListStyles(contactsList);
+    const contacts = await getContacts();    
+    addContactsListStyles(contacts);    
     const container = document.getElementById('container');
-    renderContactsList(container, contactsList);
+    const state = { container, contacts };
+    renderContactsList(state);
   } catch {
     console.log('Failed to load contacts list');
   }
