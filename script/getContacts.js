@@ -1,7 +1,7 @@
-const contactsListUrl = '../data.json';
+const contactsUrl = '../data.json';
 
 export default async () => {
-  const res = await fetch(contactsListUrl);
-  const peopleList = await res.json();
-  return peopleList;
+  const res = await fetch(contactsUrl);
+  const contacts = await res.json();
+  return contacts;
 };

@@ -1,4 +1,5 @@
 import getContacts from './getContacts.js';
+import preprocessContacts from './preprocessContacts.js';
 import renderContactsList from './renderContactsList.js';
 
 
@@ -21,13 +22,12 @@ const addContactsListStyles = (contacts) => {
 };
 
 (async () => {
-  try {
-    const contacts = await getContacts();    
-    addContactsListStyles(contacts);    
-    const container = document.getElementById('container');
-    const state = { container, contacts };
-    renderContactsList(state);
-  } catch {
-    console.log('Failed to load contacts list');
-  }
+  const contacts = await getContacts();
+  addContactsListStyles(contacts);
+  const state = {
+    container: document.getElementById('container'),
+    contacts,
+    ...preprocessContacts(contacts),
+  };
+  renderContactsList(state);
 })();

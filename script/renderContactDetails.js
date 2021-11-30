@@ -22,9 +22,36 @@ import renderContactsList from "./renderContactsList.js";
   */
 
 const templateContactDetails = document.getElementById('tmpl-contact-details');
+const templateFriendsListHeader = document.getElementById('tmpl-friends-list-header');
+const templateFriendsListItem = document.getElementById('tmpl-friends-list-item');
+
+const renderFriendListHeader = (text) => {
+  const item = templateFriendsListHeader.content.cloneNode(true);
+  const li = item.querySelector('li');
+  li.innerText = text;
+  return item;
+};
+
+const renderFriendListItem = (person) => {
+  const item = templateFriendsListItem.content.cloneNode(true);
+  const nameSpan = item.querySelector('li span');
+  nameSpan.innerText = person.name;
+  return item;
+};
+
+const addFriends = (friendsUl, contact, state) => {
+  const { contactsMap } = state;
+  const header = renderFriendListHeader('Друзья');
+  friendsUl.appendChild(header);
+  contact.friends.forEach((friendId) => {
+    const friend = contactsMap[friendId];
+    const item = renderFriendListItem(friend);
+    friendsUl.appendChild(item);
+  })
+};
 
 export default (contact, state) => {
-  const { container, contacts } = state;
+  const { container } = state;
   const details = templateContactDetails.content.cloneNode(true);
 
   const back = details.querySelector('.back');
@@ -36,8 +63,10 @@ export default (contact, state) => {
   const name = details.querySelector('.contact-name');
   name.innerHTML = contact.name;
 
+  const friendsUl = details.querySelector('.friends-and-others ul');
+  addFriends(friendsUl, contact, state);
+
   container.innerHTML = '';
   container.appendChild(details);
   container.classList.add('details');
-  console.log(contact);
 };
