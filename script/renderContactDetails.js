@@ -66,6 +66,11 @@ const addNotFriends = (friendsUl, contact, state) => {
   addFriendListItems(friendsUl, 'Не в друзьях', contact.notFriends, state);
 };
 
+const addPopularContacts = (friendsUl, state) => {
+  const { mostPopularContactIds } = state;
+  addFriendListItems(friendsUl, 'Популярные люди', mostPopularContactIds, state);
+}
+
 export default (contact, state) => {
   const { container } = state;
   const details = templateContactDetails.content.cloneNode(true);
@@ -82,6 +87,7 @@ export default (contact, state) => {
   const friendsUl = details.querySelector('.friends-and-others ul');
   addFriends(friendsUl, contact, state);
   addNotFriends(friendsUl, contact, state);
+  addPopularContacts(friendsUl, state);
 
   container.innerHTML = '';
   container.appendChild(details);
