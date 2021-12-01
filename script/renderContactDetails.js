@@ -39,16 +39,19 @@ const renderFriendListItem = (person) => {
   return item;
 };
 
-const addFriends = (friendsUl, contact, state) => {
+const addFriendListItems = (friendsUl, headerText, contactIds, state) => {
   const { contactsMap } = state;
-  const header = renderFriendListHeader('Друзья');
+  const header = renderFriendListHeader(headerText);
   friendsUl.appendChild(header);
-  contact.friends.forEach((friendId) => {
-    const friend = contactsMap[friendId];
-    const item = renderFriendListItem(friend);
+  contactIds.forEach((contactId) => {
+    const contact = contactsMap[contactId];
+    const item = renderFriendListItem(contact);
     friendsUl.appendChild(item);
-  })
+  });
 };
+
+const addFriends = (friendsUl, contact, state) => 
+  addFriendListItems(friendsUl, 'Друзья', contact.friends, state);
 
 export default (contact, state) => {
   const { container } = state;
