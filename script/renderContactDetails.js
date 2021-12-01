@@ -55,9 +55,9 @@ const addFriends = (friendsUl, contact, state) =>
 
 const addNotFriends = (friendsUl, contact, state) => {
   if (!contact.notFriends) {
-    const { contacts } = state;
+    const { contactsList } = state;
     contact.notFriends = [];
-    for (let c of contacts) {
+    for (let c of contactsList) {
       if (c.id === contact.id || contact.friends.includes(c.id)) continue;
       contact.notFriends.push(c.id);
       if (contact.notFriends.length === 3) break;

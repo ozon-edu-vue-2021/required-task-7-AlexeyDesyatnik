@@ -14,13 +14,13 @@ const renderContact = (contact, state) => {
 };
 
 export default (state) => {
-  const { container, contacts } = state;
-  const contactsList = templateContactsList.content.cloneNode(true);
-  const ul = contactsList.querySelector('.contacts-list');
-  contacts.forEach(contact => {
+  const { container, contactsList } = state;
+  const list = templateContactsList.content.cloneNode(true);
+  const ul = list.querySelector('.contacts-list');
+  contactsList.forEach(contact => {
     const contactNode = renderContact(contact, state);
     ul.appendChild(contactNode);
   });
   container.innerHTML = '';
-  container.appendChild(contactsList);
+  container.appendChild(list);
 };

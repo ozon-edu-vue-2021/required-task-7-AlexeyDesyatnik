@@ -22,12 +22,12 @@ const addContactsListStyles = (contacts) => {
 };
 
 (async () => {
-  const contacts = await getContacts();
-  addContactsListStyles(contacts);
+  const contactsList = await getContacts();
+  addContactsListStyles(contactsList);
   const state = {
     container: document.getElementById('container'),
-    contacts,
-    ...preprocessContacts(contacts),
+    contactsList,
+    ...preprocessContacts(contactsList),
   };
   renderContactsList(state);
 })();

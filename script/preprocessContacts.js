@@ -1,6 +1,6 @@
-export default (contacts) => {
+export default (contactsList) => {
   const contactsMap = {};
-  contacts.forEach(contact => {
+  contactsList.forEach(contact => {
     contactsMap[contact.id] = contact;
   });
   // Probably will return other preprocessed structures in future
