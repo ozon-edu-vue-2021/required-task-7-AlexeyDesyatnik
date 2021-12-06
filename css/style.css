@@ -173,7 +173,8 @@ body {
   cursor: pointer;
 }
 
-#container .list-view ul li:before {
+#container .list-view ul li:before,
+#container .details-view .contact-name::before {
   content: '';
   display: inline-block;
   vertical-align: middle;
@@ -223,6 +224,14 @@ body {
   transition: transform 0.15s;
   transition: transform 0.15s, -webkit-transform 0.15s;
   z-index: 1;
+}
+
+#container .details-view .contact-name {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  font-weight: bold;
+  font-size: larger;
 }
 
 #container .details-view ul {
